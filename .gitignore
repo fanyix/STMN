@@ -1,0 +1,13 @@
+**/__pycache__
+**/*.pyc
+**/*.so
+**/.settings
+.project
+.pydevproject
+.buildpath
+**/.idea
+scripts/misc.lua
+modules/rfcn/build
+modules/assemble/build
+modules/stnbhwd/build
+external/dp/bin
