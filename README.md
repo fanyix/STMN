@@ -3,9 +3,6 @@ This code repository contains an implementation of our ECCV video detection work
 
 [Video Object Detection with an Aligned Spatial-Temporal Memory](http://fanyix.cs.ucdavis.edu/project/stmn/project.html), [Fanyi Xiao](http://fanyix.cs.ucdavis.edu/) and [Yong Jae Lee](http://web.cs.ucdavis.edu/~yjlee/) in ECCV 2018. [\[Bibtex\]](http://fanyix.cs.ucdavis.edu/project/stmn/bib.txt)
 
-## Acknowledgement
-We develop this codebase from the great code of [multipathnet](https://github.com/facebookresearch/multipathnet). 
-
 ## Getting Started
 ### Installation
 The following installation procedure is tested under:
@@ -157,6 +154,9 @@ Okay, after you're done with both commands shown above, you should have produced
 - To generate final detections with temporal linkage, go to ```$ROOT/STMN/external/dp```, run ```run_dp.m``` in MATLAB.  
 
 [**Optional**] Again, you will reproduce our results (80.5% mAP) with the above command, however it might be slow to go over the evaluation set. To assist you in this process, we also provide some parallelization utilities in ```run_dp.m``` and a launch script ```launcher.py``` under ```$ROOT/STMN/external/dp``` (note this is a different launch script than the one we used above under ```$ROOT/STMN/scripts/```). Specifically, you first set the ```opts.scan_det``` in ```run_dp.m``` to ```true``` and launch it with ```$ROOT/STMN/external/dp/launcher.py```. Then you set ```opts.scan_det``` in ```run_dp.m``` to ```false``` and ```opts.load_scan_det``` to ```true``` and run the script again in a MATLAB console. 
+
+## Acknowledgement
+We develop this codebase from the great code of [multipathnet](https://github.com/facebookresearch/multipathnet). 
 
 
 
