@@ -39,7 +39,7 @@ function config.get_train_config(model, data_root, static_root, ckpt_root)
     -- main section
     dataset = 'ImageNetVID',
     seq_per_batch = 2, -- 2
-    timestep_per_batch = 6, -- 6 
+    timestep_per_batch = 6, -- 6
     forwardBackwardPerUpdate = 1, -- 1
     batch_size = 300,  -- 300 for hard example mining, otherwise set to 128
     fg_fraction = 0.25,  -- default to 0.25
@@ -72,7 +72,7 @@ function config.get_train_config(model, data_root, static_root, ckpt_root)
     plot_loss_every = 50,  -- default to 50
     val_loss_every = 100,  -- default to 100
     val_forward_maxiter = 3,
-    nGPU = 2, 
+    nGPU = 2,
     memory_optimization = false,
     fg_threshold = 0.5,     -- if -1, then set to bg_threshold_max
     bg_threshold_min = 0.0,  -- Fast-RCNN use 0.1, whereas Faster-RCNN use 0
