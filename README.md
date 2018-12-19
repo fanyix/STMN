@@ -1,9 +1,10 @@
 
+<img src='imgs/stmn.gif' align="right" height=150>
+
 This code repository contains an implementation of our ECCV video detection work. If you use this code, please cite:
 
 [Video Object Detection with an Aligned Spatial-Temporal Memory](http://fanyix.cs.ucdavis.edu/project/stmn/project.html), [Fanyi Xiao](http://fanyix.cs.ucdavis.edu/) and [Yong Jae Lee](http://web.cs.ucdavis.edu/~yjlee/) in ECCV 2018. [\[Bibtex\]](http://fanyix.cs.ucdavis.edu/project/stmn/bib.txt)
 
-<img src='imgs/stmn.gif' align="left" width=384>
 
 ## Getting Started
 ### Installation
