@@ -36,81 +36,81 @@ for i=sub_db_inds(:)'
     file = imdb.image_ids{i};
 
     file(file == '\') = '/';
-    ind = find(file == '/', 1, 'first');
-    videoFrame = file ;
+    % ind = find(file == '/', 1, 'first');
+    % videoFrame = file ;
     if strcmp(file(1:14), 'ILSVRC2015_val')
-      videoFrame = ['val/' videoFrame];
+      % videoFrame = ['val/' videoFrame];
       valMode = true;
     else
       valMode = false;
     end
-    if strcmp(videoFrame(end-4:end), '_flip')
-      videoFrame = videoFrame(1:end-5); flip_proposal = true;
-    else
-      flip_proposal = false;
-    end
-    proposal_file = [proposal_path '/' videoFrame '.mat'];
+    
+    % if strcmp(videoFrame(end-4:end), '_flip')
+    %   videoFrame = videoFrame(1:end-5); flip_proposal = true;
+    % else
+    %   flip_proposal = false;
+    % end
+    % proposal_file = [proposal_path '/' videoFrame '.mat'];
+    % 
+    % if ~exist(proposal_file,'file')
+    %   fprintf('error: cant find file %s \n ', proposal_file);
+    %   image_roidb = [];
+    %   return;
+    % end
 
-    if ~exist(proposal_file,'file')
-      fprintf('error: cant find file %s \n ', proposal_file);
-      image_roidb = [];
-      return;
-    end
+    % try 
+    %   abst = load(proposal_file);
+    % catch
+    %   fprintf('error: cant load file %s \n ', proposal_file);
+    %   pause;
+    % end
+    % try
+    %   boxes = abst.boxes;
+    % catch
+    %   boxes = abst.aboxes;
+    % end
+    % 
+    % if isempty(boxes),   image_roidb = []; return; end;
+    % if num_proposals < 1  
+    %     boxes = boxes(boxes(:,5) > num_proposals,:);  
+    % else
+    %     boxes = boxes(1:min(num_proposals,size(boxes,1)),:); 
+    % end
+    % if isempty(boxes),   image_roidb = []; return; end;
+    % 
+    % scores = boxes(:,5);
+    % boxes = boxes(:,1:4); 
+    % 
+    % if flip_proposal
+    %   boxes(:, [1, 3]) = imdb.sizes(i, 2) + 1 - boxes(:, [3, 1]);
+    % end
+    % is_gt = rois(ii).gt;
+    % gt_boxes = rois(ii).boxes(is_gt, :);
+    % gt_classes = rois(ii).class(is_gt, :);
+    % all_boxes = cat(1, rois(ii).boxes, boxes);
+    % num_gt_boxes = size(gt_boxes, 1);
+    % num_boxes = size(boxes, 1);
 
-    try 
-      abst = load(proposal_file);
-    catch
-      fprintf('error: cant load file %s \n ', proposal_file);
-      pause;
-    end
-    try
-      boxes = abst.boxes;
-    catch
-      boxes = abst.aboxes;
-    end
-
-    if isempty(boxes),   image_roidb = []; return; end;
-    if num_proposals < 1  
-        boxes = boxes(boxes(:,5) > num_proposals,:);  
-    else
-        boxes = boxes(1:min(num_proposals,size(boxes,1)),:); 
-    end
-    if isempty(boxes),   image_roidb = []; return; end;
-
-    scores = boxes(:,5);
-    boxes = boxes(:,1:4); 
-
-    if flip_proposal
-      boxes(:, [1, 3]) = imdb.sizes(i, 2) + 1 - boxes(:, [3, 1]);
-    end
-    is_gt = rois(ii).gt;
-    gt_boxes = rois(ii).boxes(is_gt, :);
-    gt_classes = rois(ii).class(is_gt, :);
-    all_boxes = cat(1, rois(ii).boxes, boxes);
-
-    num_gt_boxes = size(gt_boxes, 1);
-    num_boxes = size(boxes, 1);
-
-    overlap = cat(1, rois(ii).overlap, zeros(num_boxes, size(rois(ii).overlap, 2)));
-    class = cat(1, rois(ii).class, zeros(num_boxes, 1));
-    for j = 1:num_gt_boxes
-        overlap(:, gt_classes(j)) = ...
-            max(full(overlap(:, gt_classes(j))), boxoverlap(all_boxes, gt_boxes(j, :))); % function boxoverlap() is under utils/
-    end
+    % overlap = cat(1, rois(ii).overlap, zeros(num_boxes, size(rois(ii).overlap, 2)));
+    % class = cat(1, rois(ii).class, zeros(num_boxes, 1));
+    % for j = 1:num_gt_boxes
+    %     overlap(:, gt_classes(j)) = ...
+    %         max(full(overlap(:, gt_classes(j))), boxoverlap(all_boxes, gt_boxes(j, :))); % function boxoverlap() is under utils/
+    % end
 
     image_roidb{1}(ii,1).image_path = imdb.image_at(i);
     image_roidb{1}(ii,1).image_id = imdb.image_ids{i};
     image_roidb{1}(ii,1).im_size = imdb.sizes(i, :);
     image_roidb{1}(ii,1).imdb_name = imdb.name;
-    image_roidb{1}(ii,1).overlap = overlap;
-    image_roidb{1}(ii,1).boxes = all_boxes;
-    image_roidb{1}(ii,1).class = class;
     image_roidb{1}(ii,1).image = [];
-    image_roidb{1}(ii,1).bbox_targets = [];
-    image_roidb{1}(ii,1).gt = [true(num_gt_boxes,1); false(size(boxes,1),1)];
-    if isfield(rois(ii), 'trackids'), 
-      image_roidb{1}(ii,1).trackids = rois(ii).trackids;
-    end
+    % image_roidb{1}(ii,1).overlap = overlap;
+    % image_roidb{1}(ii,1).boxes = all_boxes;
+    % image_roidb{1}(ii,1).class = class;
+    % image_roidb{1}(ii,1).bbox_targets = [];
+    % image_roidb{1}(ii,1).gt = [true(num_gt_boxes,1); false(size(boxes,1),1)];
+    % if isfield(rois(ii), 'trackids'), 
+    %   image_roidb{1}(ii,1).trackids = rois(ii).trackids;
+    % end
     te = toc(ts);
 
     if visualize
@@ -129,22 +129,23 @@ for i=sub_db_inds(:)'
 end
 
 image_roidb = cat(1, image_roidb{:});
-if ~isempty(bbox_means)
-  [image_roidb] = append_bbox_regression_targets(conf, image_roidb, bbox_means, bbox_stds);
-end
-if isfield(conf, 'regressTracks')
-  if isfield(conf, 'nFramesPerVid') && conf.nFramesPerVid > numel(image_roidb)
-    image_roidb = repmat(image_roidb,conf.nFramesPerVid,1 );
-  end
-  if isfield(conf, 'regressAllTracks') && conf.regressAllTracks
-    [image_roidb] = append_all_track_regression_targets(conf, image_roidb  );
-  else
-    [image_roidb] = append_track_regression_targets(conf, image_roidb, bbox_means, bbox_stds);
-  end
-   if isempty(image_roidb(1).track_rois) && ~valMode
-     image_roidb = []; return;
-  end
-end
+
+% if ~isempty(bbox_means)
+%   [image_roidb] = append_bbox_regression_targets(conf, image_roidb, bbox_means, bbox_stds);
+% end
+% if isfield(conf, 'regressTracks')
+%   if isfield(conf, 'nFramesPerVid') && conf.nFramesPerVid > numel(image_roidb)
+%     image_roidb = repmat(image_roidb,conf.nFramesPerVid,1 );
+%   end
+%   if isfield(conf, 'regressAllTracks') && conf.regressAllTracks
+%     [image_roidb] = append_all_track_regression_targets(conf, image_roidb  );
+%   else
+%     [image_roidb] = append_track_regression_targets(conf, image_roidb, bbox_means, bbox_stds);
+%   end
+%    if isempty(image_roidb(1).track_rois) && ~valMode
+%      image_roidb = []; return;
+%   end
+% end
 
 end
 

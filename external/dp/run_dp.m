@@ -34,6 +34,8 @@ opts.preload_root = {
                         fullfile(root_path, 'ckpt/stmn_eval/eval/mat'), ...
                     };
 
+
+
 % do validation after val_interval iters, or not
 opts.do_val                 = true; 
 opts.cache_name_            = opts.cache_name;
