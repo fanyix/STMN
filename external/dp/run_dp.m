@@ -112,7 +112,7 @@ rfcn_test_vid_preload_det(conf, imdb_val_lite.imdb_test, imdb_val_lite.roidb_tes
                   'top_percentage', opts.top_percentage, ...
                   'pre_nms_thresh', opts.pre_nms_thresh, ...
                   'neighbor_rescoring', opts.neighbor_rescoring);
-exit();
+% exit();
 
 
 

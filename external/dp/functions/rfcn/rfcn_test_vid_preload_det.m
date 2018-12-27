@@ -529,6 +529,8 @@ function [boxes, scores, mot_boxes] = preload_det(vid_name, frm_idx, cls_list, p
             else
                 mot_boxes = [boxes zeros(size(boxes, 1), 1)];
             end
+        else
+            assert(false, sprintf('detection file %s not found', det_filename));
         end
     else
         for idx = 1: length(preload_root)
@@ -550,6 +552,8 @@ function [boxes, scores, mot_boxes] = preload_det(vid_name, frm_idx, cls_list, p
                 else
                     mot_boxes = [mot_boxes; [cur_boxes zeros(size(cur_boxes, 1), 1)]];
                 end
+            else
+                assert(false, sprintf('detection file %s not found', det_filename));
             end
         end
     end
