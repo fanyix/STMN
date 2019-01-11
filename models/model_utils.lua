@@ -285,6 +285,17 @@ function utils.loadModelWeights(src_params, tgt_model, mode)
       tgt_params[idx]:copy(src_params[idx])
     end
   
+  elseif mode == 'full_no_class' then
+    
+    -- replace the vgg weights
+    assert(#src_params == #tgt_params)
+    for idx = 1, #tgt_params do
+      if idx ~= 217 and idx ~= 218 then 
+        assert(src_params[idx]:nElement() == tgt_params[idx]:nElement())
+        tgt_params[idx]:copy(src_params[idx])
+      end
+    end
+  
   elseif mode == 'resnet101_bottleneck' then
     local bottleneck_module_idx = 189
     for idx = 1, #src_params do
